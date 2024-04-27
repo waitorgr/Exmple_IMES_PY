@@ -52,7 +52,7 @@ Ten projekt służy jako prosty demonstrator funkcjonalności "System logowania 
 ### Kluczowe funkcje
 
 - **Generowanie losowych danych pracowniczych**: Podczas generowania losowych danych pracowniczych system tworzy również trzy pliki: WorkersFactory1.db, WorkersFactory2.db, WorkersFactory3.db. Pliki te zawierają dane o pracownikach dla trzech różnych fabryk.
-- **Przechowywanie i przetwarzanie danych w bazie danych SQLite**: Dane pracowników są przechowywane i przetwarzane w bazie danych SQLite o nazwie Finish.db.
+- **Przechowywanie i przetwarzanie danych w bazie danych SQLite**: Dane pracowników są przechowywane i przetwarzane w bazie danych SQLite o nazwie merged_employees.db.
 - **Generowanie unikalnych identyfikatorów IMES i kodów pracownika WorkerCodIMES**: Po przetworzeniu danych system generuje unikalne identyfikatory IMES i kody pracownika WorkerCodIMES dla każdego pracownika. Dane te są przechowywane w pliku Finish.db, który pełni rolę bazy danych SQLite.
 
   ### C# code
