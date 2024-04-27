@@ -5,7 +5,10 @@ from collections import defaultdict
 from typing import List
 
 class Employee:
+    """Class representing an employee."""
+
     def __init__(self, name, factory, departmentName, id=-1, IMES="", WorkerCodIMES=""):
+        """Initialize an employee object."""
         self.id = id
         self.name = name
         self.factory = factory
@@ -14,22 +17,29 @@ class Employee:
         self.WorkerCodIMES = WorkerCodIMES
 
     def add_imes(self, imes: str):
+        """Add IMES to the employee."""
         self.imes = imes
 
     def add_worker_cod_imes(self, worker_cod_imes: str):
+        """Add WorkerCodIMES to the employee."""
         self.worker_cod_imes = worker_cod_imes
 
 class EmployeeRecords:
+    """Class for managing employee records in a database."""
+
     def __init__(self, database_path):
+        """Initialize EmployeeRecords object."""
         self.database_path = database_path
         self.create_table_if_not_exists()
 
     def create_table_if_not_exists(self):
+        """Create 'Employees' table if it does not exist."""
         with sqlite3.connect(self.database_path) as connection:
             cursor = connection.cursor()
             cursor.execute("CREATE TABLE IF NOT EXISTS Employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, factory TEXT NOT NULL, departmentName TEXT NOT NULL)")
 
     def add_employee(self, employee):
+        """Add an employee to the database."""
         with sqlite3.connect(self.database_path) as connection:
             cursor = connection.cursor()
             cursor.execute("INSERT INTO Employees (name, factory, departmentName) VALUES (?, ?, ?)",
@@ -37,15 +47,19 @@ class EmployeeRecords:
             connection.commit()
 
 def delete_database_if_exists(path):
-        if os.path.exists(path):
-            os.remove(path)
-
+    """Delete database file if it exists."""
+    if os.path.exists(path):
+        os.remove(path)
 
 class DatabaseManager:
+    """Class for managing databases."""
+
     def __init__(self, db_paths):
+        """Initialize DatabaseManager object."""
         self.db_paths = db_paths
 
     def merge_databases(self, new_db_path):
+        """Merge multiple databases into a new database."""
         with sqlite3.connect(new_db_path) as new_connection:
             new_cursor = new_connection.cursor()
             new_cursor.execute("CREATE TABLE IF NOT EXISTS Employees (id INTEGER , name TEXT NOT NULL, factory TEXT NOT NULL, departmentName TEXT NOT NULL)")
@@ -57,6 +71,7 @@ class DatabaseManager:
                     new_cursor.executemany("INSERT INTO Employees (id, name, factory, departmentName) VALUES (?, ?, ?, ?)", employees_data)
 
 def generate_random_data():
+    """Generate random data for employee."""
     factory_names = ["Gates USA", "Gates Canada", "Gates UK", "Gates Germany", "Gates France", "Gates Australia", "Gates Poland", "Gates Spain", "Gates Italy", "Gates Japan"]
     department_names = ["Production Department", "Research and Development Department", "Marketing Department", "Sales Department", "Human Resources Department", "Finance Department", "Information Technology Department", "Customer Service Department", "Quality Assurance Department", "Supply Chain Department"]
     names = ["John", "Mary", "James", "Linda", "Robert", "Patricia", "Michael", "Jennifer", "William", "Elizabeth", "David", "Barbara", "Joseph", "Jessica", "Richard", "Sarah", "Thomas", "Karen", "Charles", "Nancy", "Daniel", "Margaret", "Matthew", "Lisa", "Anthony", "Betty", "Donald", "Dorothy", "Mark", "Sandra", "Paul", "Ashley", "Steven", "Kimberly", "Andrew", "Donna", "Kenneth", "Emily", "George", "Carol", "Joshua", "Michelle", "Kevin", "Amanda", "Brian", "Melissa", "Edward", "Deborah", "Ronald", "Stephanie"]
@@ -67,11 +82,15 @@ def generate_random_data():
     return Employee(name, factory, department)
 
 class ProcessingData:
+    """Class for processing employee data."""
+
     def __init__(self, connection_string: str):
+        """Initialize ProcessingData object."""
         self.employees = []  # List to store employees
         self.read_employees_from_database(connection_string)
 
     def read_employees_from_database(self, connection_string: str):
+        """Read employees from database."""
         with sqlite3.connect(connection_string) as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT id, name, factory, departmentName FROM Employees")
@@ -81,16 +100,19 @@ class ProcessingData:
                 self.add_employee(name, factory, departmentName, id)
 
     def add_employee(self, name: str, factory: str, department_name: str, id: int):
+        """Add an employee to the list."""
         employee = Employee(name, factory, department_name, id)
         self.employees.append(employee)
 
     def print_employees_table(self):
+        """Print the employees table."""
         print("{0:<5} {1:<20} {2:<20} {3:<20} {4:<20} {5:<20}".format("ID", "Name", "Factory", "Department", "IMES", "WorkerCodIMES"))
         print('-' * 100)
         for employee in self.employees:
             print("{0:<5} {1:<20} {2:<20} {3:<20} {4:<20} {5:<20}".format(employee.id, employee.name, employee.factory, employee.department_name, employee.imes, employee.worker_cod_imes))
 
     def generate_uniq_im_es(self):
+        """Generate unique IMES for employees."""
         generated_im_es = set()
         for employee in self.employees:
             chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -101,6 +123,7 @@ class ProcessingData:
             employee.add_imes(im_es)
 
     def generate_worker_cod_im_es(self):
+        """Generate WorkerCodIMES for employees."""
         id_counter = defaultdict(int)
         for employee in self.employees:
             key_suffix = self.int_to_base26(id_counter[employee.id])
@@ -109,6 +132,7 @@ class ProcessingData:
 
     @staticmethod
     def int_to_base26(value: int) -> str:
+        """Convert an integer to base-26."""
         chars = "abcdefghijklmnopqrstuvwxyz"
         result = ""
         while True:
@@ -120,9 +144,11 @@ class ProcessingData:
         return result
 
     def get_employees(self) -> List['Employee']:
+        """Get the list of employees."""
         return self.employees
 
     def save_employees_to_database(self, db_name: str):
+        """Save employees to a database."""
         if os.path.exists(db_name):
             os.remove(db_name)
             print(f"{db_name} deleted successfully")
@@ -145,10 +171,14 @@ class ProcessingData:
 
 
 class EmulationIMES:
+    """Class for emulating IMES."""
+
     def __init__(self, connection_string):
+        """Initialize EmulationIMES object."""
         self._connection_string = connection_string
 
     def login(self, worker_cod_imes):
+        """Simulate login using WorkerCodIMES."""
         with sqlite3.connect(self._connection_string) as connection:
             cursor = connection.cursor()
             query = f"SELECT * FROM Employees WHERE WorkerCodIMES = '{worker_cod_imes}'"
@@ -166,6 +196,7 @@ class EmulationIMES:
                 print("User not found")
 
 def GenerateData():
+    """Generate employee data."""
     for factory_num in range(1, 4):
         db_path = f"WorkersFactory{factory_num}.db"
         delete_database_if_exists(db_path)
@@ -192,16 +223,13 @@ def GenerateData():
     print("Data saved successfully")
 
 def main():
-
+    """Main function."""
     operation = input("Choose operation \n1.generate data, \n2.Employee search (after data generation):\n ")
 
     if operation == "1":
         GenerateData()
 
-
-    if os.path.exists("Finish.db"):
-        a=0
-    else:
+    if not os.path.exists("Finish.db"):
         print("Data has not been generated, or generation is incomplete")
         print("Start generation")
         GenerateData()
@@ -214,6 +242,5 @@ def main():
 
     print("Press enter to exit the program")
     input()
-
 
 main()
