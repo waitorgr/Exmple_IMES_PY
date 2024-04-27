@@ -43,6 +43,8 @@ This project serves as a simple demonstration of implementing an "Employee Login
 
 You can use this project as a foundation for extending its functionality or learning about interaction with SQLite databases and developing access control to the system.
 
+### C# code:
+
 ## Projekt: System logowania pracownika za pomocą kodu pracownika
 
 ### Opis
