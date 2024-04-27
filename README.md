@@ -43,7 +43,9 @@ This project serves as a simple demonstration of implementing an "Employee Login
 
 You can use this project as a foundation for extending its functionality or learning about interaction with SQLite databases and developing access control to the system.
 
-### C# code:
+### C# code: https://github.com/waitorgr/Example_IMES_CS
+
+Please provide feedback: davidpahomov26@gmail.com
 
 ## Projekt: System logowania pracownika za pomocą kodu pracownika
 
@@ -57,7 +59,6 @@ Ten projekt służy jako prosty demonstrator funkcjonalności "System logowania 
 - **Przechowywanie i przetwarzanie danych w bazie danych SQLite**: Dane pracowników są przechowywane i przetwarzane w bazie danych SQLite o nazwie merged_employees.db.
 - **Generowanie unikalnych identyfikatorów IMES i kodów pracownika WorkerCodIMES**: Po przetworzeniu danych system generuje unikalne identyfikatory IMES i kody pracownika WorkerCodIMES dla każdego pracownika. Dane te są przechowywane w pliku Finish.db, który pełni rolę bazy danych SQLite.
 
-  ### C# code
 
 ### Użycie
 
@@ -93,4 +94,6 @@ pip install -r requirements.txt
 
 Możesz użyć tego projektu jako podstawy do rozszerzania jego funkcjonalności lub nauki o interakcji z bazami danych SQLite i tworzenia kontroli dostępu do systemu.
 
- ### C# code
+ ### C# code https://github.com/waitorgr/Example_IMES_CS
+
+ Proszę o opinię: davidpahomov26@gmail.com
