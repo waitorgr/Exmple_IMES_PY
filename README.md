@@ -50,7 +50,7 @@ This project serves as a simple demonstration of implementing an "Employee Login
 
 ### Purpose
 
-You can use this project as a foundation for extending its functionality or learning about interaction with SQLite databases and developing access control to the system.
+You can use this project as a foundation for extending its functionality or  developing access control to the system.
 
 ### C# code: https://github.com/waitorgr/Example_IMES_CS
 
@@ -110,7 +110,7 @@ pip install -r requirements.txt
 
 ### Cel
 
-Możesz użyć tego projektu jako podstawy do rozszerzania jego funkcjonalności lub nauki o interakcji z bazami danych SQLite i tworzenia kontroli dostępu do systemu.
+Możesz użyć tego projektu jako podstawy do rozszerzania jego funkcjonalności lub  tworzenia kontroli dostępu do systemu.
 
  ### C# code https://github.com/waitorgr/Example_IMES_CS
 
